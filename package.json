@@ -1,0 +1,30 @@
+{
+  "name": "spawncamping-batman",
+  "version": "0.0.1",
+  "description": "LaTeX Source Code Listings Generator for lazy people",
+  "main": "index",
+  "preferGlobal": "true",
+  "bin": {
+    "spawncamping-batman": "index"
+  },
+  "dependencies": {
+    "commander": "^2.7.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kintesh/spawncamping-batman.git"
+  },
+  "keywords": [
+    "spawncamping-batman",
+    "spawncamping",
+    "batman",
+    "LaTeX",
+    "Source Code Listings"
+  ],
+  "author": "Kintesh <i.am@kinte.sh> (http://kinte.sh/)",
+  "license": "Apache License Version 2.0",
+  "homepage": "https://github.com/kintesh/spawncamping-batman",
+  "devDependencies": {
+    "filewalker": "^0.1.2"
+  }
+}

@@ -1,0 +1,84 @@
+#!/usr/bin/env node
+/**
+ * Created by kintesh on 08/04/15.
+ */
+
+if (!module.parent) {
+    process.title = "spawncamping-batman";
+    main(process.argv.slice(), function(err, code) {
+        if (err) throw err;
+        return process.exit(code || 0);
+    });
+} else {
+    module.exports = main;
+}
+
+function main(argv) {
+
+    var program = require("commander"),
+        path = require("path"),
+        fs = require("fs");
+
+    program
+        .version("1.0.0")
+        .usage("[options] [source file]")
+        .option("-i, --ignore [value]", "Do not list those files that match the wild-card pattern.")
+        .option("-v, --verbose", "Print verbose output on console")
+        .parse(process.argv);
+
+    if(argv.length <= 2) {
+        return program.help();
+    } else {
+
+        var srcDir = argv[argv.length - 1],
+            ignore = new RegExp(program.ignore),
+            out = "",
+            exts = {
+                ".css" : "css",
+                ".js" : "javascript",
+                ".json": "javascript",
+                ".py": "python",
+                "": "text"
+            },
+            latex = function(lang, file){
+                return "\\inputminted[linenos,breaklines,fontsize=\\footnotesize]" +
+                    "{"+lang+"}{"+file+"}\n\n";
+            };
+
+        scanDir(srcDir);
+
+        function scanDir(dir) {
+            fs.readdirSync(dir).forEach(function(item) {
+                ignore.lastIndex = 0;
+                var match = ignore.exec(item);
+                if(match != null)
+                    return;
+                var itemPath = path.join(dir, item);
+                var stat = fs.statSync(itemPath);
+                if (stat.isFile()) {
+                    printFile(itemPath);
+                } else if (stat.isDirectory()) {
+                    printDir(itemPath);
+                    scanDir(itemPath);
+                }
+            })
+        }
+
+        function printFile(file) {
+            if (program.verbose) console.log("F: " + file);
+            out += "\\newpage\n\\section{"+path.basename(file)+"}\n";
+            out += latex(exts[path.extname(file)], file);
+        }
+
+        function printDir(dir) {
+            if (program.verbose) console.log("D: " + dir);
+            //console.log("\\section{"+path.basename(dir)+"}");
+        }
+
+        if (program.verbose) console.log("\n" + out + "\n");
+
+        var outFile = path.join(process.cwd(), path.basename(srcDir));
+        outFile = outFile+".tex";
+        fs.writeFileSync(outFile, out, "utf8");
+    }
+}
