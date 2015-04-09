@@ -22,7 +22,8 @@ function main(argv) {
     program
         .version("1.0.0")
         .usage("[options] [source file]")
-        .option("-i, --ignore [value]", "Do not list those files that match the wild-card pattern.")
+        .option("-i, --ignore [value]", "Do not include those files that match the wild-card pattern")
+        .option("-n, --nofile", "Do not output file")
         .option("-v, --verbose", "Print verbose output on console")
         .parse(process.argv);
 
@@ -49,10 +50,12 @@ function main(argv) {
 
         function scanDir(dir) {
             fs.readdirSync(dir).forEach(function(item) {
-                ignore.lastIndex = 0;
-                var match = ignore.exec(item);
-                if(match != null)
-                    return;
+                if(program.ignore != undefined) {
+                    ignore.lastIndex = 0;
+                    var match = ignore.exec(item);
+                    if (match != null)
+                        return;
+                }
                 var itemPath = path.join(dir, item);
                 var stat = fs.statSync(itemPath);
                 if (stat.isFile()) {
@@ -75,10 +78,12 @@ function main(argv) {
             //console.log("\\section{"+path.basename(dir)+"}");
         }
 
-        if (program.verbose) console.log("\n" + out + "\n");
+        console.log("\n" + out + "\n");
 
-        var outFile = path.join(process.cwd(), path.basename(srcDir));
-        outFile = outFile+".tex";
-        fs.writeFileSync(outFile, out, "utf8");
+        if(!program.nofile) {
+            var outFile = path.join(process.cwd(), path.basename(srcDir));
+            outFile = outFile + ".tex";
+            fs.writeFileSync(outFile, out, "utf8");
+        }
     }
 }
