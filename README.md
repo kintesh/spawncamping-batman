@@ -1,5 +1,5 @@
 # spawncamping-batman
-LaTeX Source Code Listings Generator for lazy people.
+LaTeX Source Code Listings Generator for lazy people. It uses LaTeX, minted, Pygments, Node JS.
 
 
 #Installation
