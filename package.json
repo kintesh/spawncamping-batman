@@ -19,7 +19,12 @@
     "spawncamping",
     "batman",
     "LaTeX",
-    "Source Code Listings"
+    "Source Code Listings",
+    "minted",
+    "Pygments",
+    "syntax",
+    "highlighting",
+    "code"
   ],
   "author": "Kintesh <i.am@kinte.sh> (http://kinte.sh/)",
   "license": "Apache License Version 2.0",
