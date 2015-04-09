@@ -39,6 +39,8 @@ function main(argv) {
                 ".js" : "javascript",
                 ".json": "javascript",
                 ".py": "python",
+                ".html": "html",
+                ".htm": "html",
                 "": "text"
             },
             latex = function(lang, file){
