@@ -21,7 +21,7 @@ function main(argv) {
 
     program
         .version("1.0.0")
-        .usage("[options] [source file]")
+        .usage("[options] [source directory]")
         .option("-i, --ignore [value]", "Do not include those files that match the wild-card pattern")
         .option("-n, --nofile", "Do not output file")
         .option("-v, --verbose", "Print verbose output on console")
