@@ -41,6 +41,12 @@ function main(argv) {
                 ".py": "python",
                 ".html": "html",
                 ".htm": "html",
+                ".java": "java",
+                ".xml" : "xml",
+                ".properties": "text",
+                ".sh": "shell",
+                ".bat": "batch",
+                ".sql": "sql",
                 "": "text"
             },
             latex = function(lang, file){
