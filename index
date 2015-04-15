@@ -91,7 +91,7 @@ function main(argv) {
         console.log("\n" + out + "\n");
 
         if(!program.nofile) {
-            var outFile = path.join(process.cwd(), path.basename(srcDir));
+            var outFile = path.join(process.cwd(), "/" + path.basename(srcDir));
             outFile = outFile + ".tex";
             fs.writeFileSync(outFile, out, "utf8");
         }
