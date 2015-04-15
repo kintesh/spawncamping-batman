@@ -7,7 +7,7 @@ LaTeX Source Code Listings Generator for lazy people. It uses LaTeX, minted, Pyg
 This tool requires:
 
 * Node.js - Download and install latest version for your platform from [nodejs.org] (https://nodejs.org/download/)
-* minted - See document here for its [installation guide here](https://github.com/gpoore/minted/blob/master/source/minted.pdf)
+* minted - version 2.0 [see this document for installation guide](https://github.com/gpoore/minted/blob/master/source/minted.pdf)
 
 Run the following command to install latest version of spawncamping-batman.
 
