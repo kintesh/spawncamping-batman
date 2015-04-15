@@ -77,7 +77,9 @@ function main(argv) {
 
         function printFile(file) {
             if (program.verbose) console.log("F: " + file);
-            out += "\\newpage\n\\section{"+path.basename(file)+"}\n";
+            var fileName = path.basename(file),
+                filter = /(_|\$)/g;
+            out += "\\newpage\n\\section{"+fileName.replace(filter, "\\$1")+"}\n";
             out += latex(exts[path.extname(file)], file);
         }
 
